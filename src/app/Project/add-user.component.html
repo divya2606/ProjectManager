@@ -1,0 +1,72 @@
+<div class="tab-pane" id="userPane">
+        <form id="userForm" (ngSubmit)="addUser()" class="form-horizontal" ngNativeValidate >
+            <section>
+                <!-- <input type="hidden"  id="userId" [(ngModel)]="newUser.userId" name="userId">   -->
+                <div class="form-group row">
+                    <label class="col-xs-1 defaultLabel" for="fname">First Name:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control defaultTexBox" id="fname" [(ngModel)]="newUser.fname" name="fname" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xs-1 defaultLabel" for="lname">Last Name:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control defaultTexBox" id="lname" [(ngModel)]="newUser.lname" name="lname" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xs-1 defaultLabel" for="lname">Employee ID:</label>
+                    <div class="col-xs-3">
+                        <input type="text" class="form-control defaultTexBox" id="eid" [(ngModel)]="newUser.eid" name="eid" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-offset-3 col-xs-4">
+                        <button type="submit" class="btn defaultButton">{{button}}</button>
+                        <button type="button" class="btn defaultButton" (click)="resetTs()">Reset</button>
+                    </div>
+                </div>
+            </section>
+        </form>
+            <hr class="style7" align="left" />
+            <section>
+                <div class="form-group row">
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control defaultTexBox" [(ngModel)]="searchText" placeholder="Search..." />
+                    </div>
+                    <label class="col-xs-1 sortLabel">Sort:</label>
+                    <div class="col-xs-4">
+                        <button (click)="sortTask(1)" class="btn defaultButton" >First Name</button>
+                        <button (click)="sortTask(2)" class="btn defaultButton">Last Name</button>
+                        <button (click)="sortTask(3)" class="btn defaultButton">Id</button>
+                    </div>
+                </div>
+                <hr class="style8" align="left" />
+                <table class="table sortable" id="userTable">
+                    <tbody>
+                        <tr class="bordered" *ngFor="let user of users| userFilter: searchText">
+                            <td>
+                                <table class="table" id="userDetails">
+                                    <tr>
+                                        <td class="col-xs-3"><p>{{user.fname}}</p></td>
+                                        <td class="col-xs-1"><button (click)="updateUser(user)" class="btn defaultButton">Edit</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-3">
+                                            <p>{{user.lname}}</p>
+                                        </td>
+                                        <td class="col-xs-1"><button (click)="deleteUser(user.userId)" class="btn defaultButton">Delete</button></td>    
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-1">
+                                            <p> {{user.eid}}</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        <!-- </form> -->
+    </div>

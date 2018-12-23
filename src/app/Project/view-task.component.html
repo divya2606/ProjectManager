@@ -1,0 +1,73 @@
+<div class="tab-pane" id="viewPane">
+    <form #taskForm="ngForm" class="form-horizontal">
+        <div class="form-group row">
+            <label class="col-xs-1 defaultLabel">Project:</label>
+            <div class="col-xs-3">
+                <input type="text" class="form-control defaultTexBox" id="filter-by-project" name="project" [(ngModel)]="spname"/>
+            </div>
+            <button type="button" class="btn search col-xs-1" (click)="projectModal()">Search</button>
+            <!-- <div class="backdrop" [ngStyle]="{'display':display}"> -->
+            <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':projectdisplay}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" (click)="onProjectCloseHandled()">&times;</button>
+                            <h4 class="modal-title">Project List</h4>
+                        </div>
+                        <div class="modal-body">
+                                <input type="text" class="form-control defaultTexBox" placeholder="Search..." id="searchModalProject" onkeyup="selectModalValue('searchModalProject','modalProjectTable')"/>
+                            <table class="table" id="modalProjectTable">
+                                <tr *ngFor="let proj of projectDet">
+                                    <td>{{proj.project}}</td>
+                                    <td><button type="button" class="btn col-xs-4" (click)="selectProj(proj)">Select</button></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" (click)="onProjectCloseHandled()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+            <label class="col-xs-1 sortLabel">Sort Task By:</label>
+            <div class="col-xs-5">
+                <!-- <button type="submit" class="btn defaultButton">Start Date</button>
+                <button type="submit" class="btn defaultButton">End Date</button>
+                <button type="submit" class="btn defaultButton">Priority</button>
+                <button type="submit" class="btn defaultButton">Completed</button> -->
+
+                <button (click)="sortTask(1)" class="btn defaultButton" >Start Date</button>
+                <button (click)="sortTask(2)" class="btn defaultButton">End Date</button>
+                <button (click)="sortTask(3)" class="btn defaultButton">Priority</button>
+                <button (click)="sortTask(4)" class="btn defaultButton">Completed</button>
+            </div>
+        </div>
+        <hr class="style6" />
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Parent</th>
+                    <th>Priority</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                 <!-- <tr *ngFor="let task of tasks| taskFilter: sTask:spTask:sPriorityFrom:sPriorityTo:sStartdate:sEnddate"> -->
+                 <tr *ngFor="let task of tasks| taskFilter: spname">
+                        <td>{{task.tname}}</td>
+                        <td>{{task.ptask}}</td>
+                        <td>{{task.tpriority}}</td>
+                        <td>{{task.tsdate}}</td>
+                        <td>{{task.tedate}}</td>
+                        <td><button (click)="updateTask(task)" class="btn defaultButton">Edit</button></td>
+                        <td><button (click)="endTask(task.taskId)" class="btn defaultButton">End Task</button></td>
+                    </tr> 
+            </tbody>
+        </table>
+    </form>
+</div>

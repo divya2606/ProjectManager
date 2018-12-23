@@ -1,0 +1,322 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 10px;
+    font-size:100%;
+}
+    
+    /* Tablet Landscape */
+    /* @media screen and (max-width: 1060px) {
+        #primary { width:67%; }
+        #secondary { width:30%; margin-left:3%;}  
+    } */
+    
+    /* Tabled Portrait */
+    /* @media screen and (max-width: 768px) {
+        #primary { width:100%; }
+        #secondary { width:100%; margin:0; border:none; }
+    } */
+    
+#projectPane, #addPane, #viewPane, #userPane {
+    padding: 10px;
+}
+    
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color:#7371fc;
+    background-color: #fff;
+    font-size: 150%;
+}
+
+input[data-readonly] {
+    pointer-events: none;
+  }
+  
+.defaultLabel {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 100%;
+    font-weight: bold;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    color: black;
+}
+    
+.defaultTexBox {
+    background-color: whitesmoke;
+    border-style: none;
+}
+    
+.checkLabel {
+    display: inline;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}    
+
+.search {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    border: 2px black solid;
+    color: black;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 2px 1px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: transparent;
+    /* float: left; */
+}
+    
+.sortLabel {
+    display: inline;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+    
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    background-color: grey;
+    outline-style: none;
+}
+    
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 25px;
+    border-radius: 60%; 
+    background-color: grey;
+    cursor: pointer;
+    border-color: black;
+    border-style: groove;
+    border-width: 1px;
+}
+    
+.rangeMin {
+    display: inline-block;
+    width: 225px;
+    text-align: left;
+}
+    
+.rangeMax {
+    display: inline-block;
+    width: 220px;
+    text-align: right;
+}
+
+.addrangeMin {
+    display: inline-block;
+    width: 180px;
+    text-align: left;
+}
+        
+.addrangeMax {
+    display: inline-block;
+    width: 175px;
+    text-align: right;
+}
+    
+.defaultButton {
+    font-family: cursive;
+    outline-style: auto;
+    float: none;
+    width: auto;
+    background-color: darkgray;
+    padding: 5px;
+    margin-right: 10px;
+}
+    
+hr.style6 {
+    background-color: #fff;
+    border-top: 2px dotted #8c8b8b;
+}
+    
+hr.style7 {
+    background-color: #fff;
+    border-top: 2px double #0b19e0;
+    display: block;
+    width: 600px;
+}
+    
+hr.style8 {
+    background-color: #fff;
+    border-top: 2px dotted #0b19e0;
+    display: block;
+    width: 600px;
+}
+    
+.nav>li>.active::after {
+    color: aqua;
+}
+    
+.nav>li>a {
+    color: black;
+    font-size: 130%;
+    text-decoration: none;
+}
+    
+#myTable td {
+    border: none;
+    border-bottom: dotted;
+    border-color: whitesmoke;
+}
+    
+#myTable th {
+    border: none;
+}
+    
+#myTable a {
+    color: #333;
+}
+    
+#myTable p {
+    background-color: whitesmoke;
+    border-style: none;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+    
+#userTable {
+    width: 600px;
+    border-top: none;
+}
+    
+#userTable td{
+    border: none;
+    padding: 0px;
+    padding-right: 15px;
+    border-top-color: #0b19e0;
+}
+    
+#userDetails tr {
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+    
+tr.bordered {
+    border-bottom: 2px dotted #0b19e0;
+}
+    
+    
+#userTable p {
+    background-color: whitesmoke;
+    border-style: none;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+     
+#projectList {
+    width: 50%;
+}
+    
+#projectSummary {
+    background-color: whitesmoke;
+}
+    
+.summaryTextBox {
+    background-color: whitesmoke;
+    border: 0px none whitesmoke;
+    box-shadow: none;
+}
+    
+.summaryLabel {
+    display: inline;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    padding: .2em .6em .3em;
+    font-size: 100%;
+    font-weight: bold;
+    line-height: 1;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: baseline;
+}
+    
+.prioritybox {
+    height: 80px;
+    background-color: whitesmoke;
+}
+
+.backdrop{ 
+    background-color:rgba(0,0,0,0.6);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+}
+    
+    
+/* .container label{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+} 
+      
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border: 10px, solid, black;
+      }      
+
+      .container input:checked ~ .checkmark {
+        background-color: white;
+
+      }
+      
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      
+      /* Show the checkmark when checked */
+      /*.container input:checked ~ .checkmark:after {
+        display: block;
+      }
+      
+      /* Style the checkmark/indicator */
+      /*.container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        font-family: "Comic Sans MS", cursive, sans-serif;
+      } */
+      
+      
+    
+    

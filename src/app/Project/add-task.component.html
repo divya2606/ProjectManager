@@ -1,0 +1,132 @@
+<div class="tab-pane active" id="addPane">
+        <form id="taskForm" (ngSubmit)="addProject()" class="form-horizontal" ngNativeValidate>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="project">Project:</label>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control defaultTexBox" id="pname" [(ngModel)]="newTask.pname" name="pname" required data-readonly>
+                </div>
+                <button type="button" class="btn search col-xs-1" (click)="projectModal()" data-target="#projectModal">Search</button>
+                <!-- <div class="backdrop" [ngStyle]="{'display':display}"> -->
+                    <div id="projectModal" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':projectdisplay}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" (click)="onProjectCloseHandled()">&times;</button>
+                                    <h4 class="modal-title">Project List</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" class="form-control defaultTexBox" placeholder="Search..." id="searchModalProject" onkeyup="selectModalValue('searchModalProject','modalProjectTable')"/>
+                                    <table class="table" id="modalProjectTable">
+                                        <tr *ngFor="let proj of projectDet">
+                                            <td>{{proj.project}}</td>
+                                            <td><button type="button" class="btn col-xs-4" (click)="selectProj(proj)">Select</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" (click)="onProjectCloseHandled()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="task">Task:</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control defaultTexBox" id="tname" [(ngModel)]="newTask.tname" name="tname" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-1 col-xs-5">
+                     <input type="checkbox" id="pcheck" [(ngModel)]="newTask.pcheck" name="pcheck" [disabled]="disableparentcheck"><label class="checkLabel">Parent Task</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="priority">Priority:</label>
+                <div class="col-xs-5">
+                    <span id="slider_min_value" class="addrangeMin">0</span>
+                    <span id="slider_max_value" class="addrangeMax">30</span>
+                    <input type="range" class="slider" min="0" max="30" value="10" [(ngModel)]="newTask.tpriority" name="tpriority" id="tpriority" step="1" [disabled]="newTask.pcheck"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="ParentTask">Parent Task:</label>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control defaultTexBox" id="ptask" [(ngModel)]="newTask.ptask" name="ptask" [disabled]="newTask.pcheck" readonly/>
+                </div>
+                <button type="button" class="btn search col-xs-1" [disabled]="newTask.pcheck" (click)="ptaskModal()" data-target="#ptaskModal">Search</button>
+                <!-- <div class="backdrop" [ngStyle]="{'display':display}"> -->
+                    <div id="ptaskModal" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':ptaskdisplay}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" (click)="onPtaskCloseHandled()">&times;</button>
+                                    <h4 class="modal-title">Parent Task List</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" class="form-control defaultTexBox" placeholder="Search..." id="searchModalParentTask" onkeyup="selectModalValue('searchModalParentTask','modalParentTaskTable')"/>
+                                    <table class="table" id="modalParentTaskTable">
+                                        <tr *ngFor="let ptask of ptaskDet">
+                                            <td>{{ptask.ptask}}</td>
+                                            <td><button type="button" class="btn col-xs-4" (click)="selectPtask(ptask)">Select</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" (click)="onPtaskCloseHandled()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="StartDate">Start Date:</label>
+                <div class="col-xs-2">
+                    <input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" class="form-control defaultTexBox" id="tsdate"  [(ngModel)]="newTask.tsdate" name="tsdate" [disabled]="newTask.pcheck"/>
+                </div>
+                <label class="col-xs-1 defaultLabel" for="EndDate">End Date:</label>
+                <div class="col-xs-2">
+                    <input type="text" onfocus="(this.type='date')" onfocusout="(this.type='text')" class="form-control defaultTexBox" id="tedate"  [(ngModel)]="newTask.tedate" name="tedate" [disabled]="newTask.pcheck"/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="EndDate">User:</label>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control defaultTexBox" id="empId" [(ngModel)]="newTask.empId" name="empId" [disabled]="newTask.pcheck" readonly/>
+                </div>
+                <button type="button" class="btn search col-xs-1" [disabled]="newTask.pcheck" (click)="userModal()" >Search</button>
+                <!-- <div class="backdrop" [ngStyle]="{'display':display}"> -->
+                    <div id="userModal" class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':userdisplay}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" (click)="onUserCloseHandled()">&times;</button>
+                                    <h4 class="modal-title">Manager List</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="text" class="form-control defaultTexBox" placeholder="Search..." id="searchModalUser" onkeyup="selectModalValue('searchModalUser','modalUserTable')"/>
+                                    <table class="table" id="modalUserTable">
+                                        <tr *ngFor="let user of userdetails">
+                                            <td>{{user.fname}}</td>
+                                            <td><button type="button" class="btn col-xs-4" (click)="selectUser(user)">Select</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" (click)="onUserCloseHandled()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-2 col-xs-4">
+                    <button type="submit" class="btn defaultButton">{{button}}</button>
+                    <button type="reset" class="btn defaultButton">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>

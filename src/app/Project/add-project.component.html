@@ -1,0 +1,160 @@
+<div class="tab-pane" id="projectPane">
+    <form id="projectForm" (ngSubmit)="addProject()" class="form-horizontal" ngNativeValidate>
+        <section>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="project">Project</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control defaultTexBox" id="project" [(ngModel)]="newProject.project"
+                        name="project" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-1 col-xs-2">
+                    <input type="checkbox" id="datecheck" name="datecheck" [(ngModel)]="datecheck"><label class="checkLabel">Set
+                        Start and End Date</label>
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control defaultTexBox" onfocus="(this.type='date')" onfocusout="(this.type='text')"
+                        id="sdate" [(ngModel)]="newProject.sdate" name="sdate" [disabled]="!datecheck">
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control defaultTexBox" onfocus="(this.type='date')" onfocusout="(this.type='text')"
+                        id="edate" [(ngModel)]="newProject.edate" name="edate" [disabled]="!datecheck">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="priority">Priority:</label>
+                <div class="col-xs-6">
+                    <span id="slider_min_value" class="rangeMin">0</span>
+                    <span id="slider_max_value" class="rangeMax">30</span>
+                    <input type="range" class="slider" min="0" max="30" value="10" [(ngModel)]="newProject.priority"
+                        name="priority" id="priority" step="1" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-1 defaultLabel" for="manager">Manager:</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control defaultTexBox" id="manager" name="manager" [(ngModel)]="manager"
+                        required data-readonly>
+                </div>
+                <button type="button" class="btn search col-xs-1" (click)="managerModal()">Search</button>
+                <!-- <div class="backdrop" [ngStyle]="{'display':display}"></div> -->
+                <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" (click)="onCloseHandled()">&times;</button>
+                                <h4 class="modal-title">Manager List</h4>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control defaultTexBox" placeholder="Search..." id="searchModalUser" onkeyup="selectModalValue('searchModalUser','modalUserTable')"/>
+                                <table class="table" id="modalUserTable">
+                                    <tr *ngFor="let user of userdetails">
+                                        <td>{{user.fname}}</td>
+                                        <td><button type="button" class="btn col-xs-4" (click)="selectManager(user)">Select</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-offset-3 col-xs-3">
+                    <button type="submit" class="btn defaultButton">{{button}}</button>
+                    <button type="reset" class="btn defaultButton">Reset</button>
+                </div>
+            </div>
+        </section>
+    </form>
+    <hr class="style7" align="left" />
+    <section>
+        <div class="form-group row">
+            <div class="col-xs-6">
+                <input type="text" class="form-control defaultTexBox" placeholder="Search..." [(ngModel)]="searchProject" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-xs-1 sortLabel">Sort:</label>
+            <div class="col-xs-5">
+                <button (click)="sortTaskProject(1)" class="btn defaultButton">Start Date</button>
+                <button (click)="sortTaskProject(2)" class="btn defaultButton">End Date</button>
+                <button (click)="sortTaskProject(3)" class="btn defaultButton">Priority</button>
+                <button (click)="sortTaskProject(4)" class="btn defaultButton">Completed</button>
+            </div>
+        </div>
+        <div class="form-group row">
+            <table class="table" id="projectList">
+                <tbody>
+                    <tr class="bordered" *ngFor="let proj of projectdetails| projectFilter: searchProject">
+                        <td>
+                            <table id="projectSummary">
+                                <tr>
+                                    <td><label class="summaryLabel">Project:</label></td>
+                                    <!-- <td><input type="text" class="form-control summaryTextBox"></td> -->
+                                    <td>
+                                        <p>{{proj.project}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="summaryLabel">No of Tasks:</label></td>
+                                    <!-- <td><input type="text" class="form-control summaryTextBox"></td> -->
+                                    <td>
+                                        <p>{{proj.taskCount}}</p>
+                                    </td>
+                                    <td><label class="summaryLabel">Completed:</label></td>
+                                    <!-- <td><input type="text" class="form-control summaryTextBox"></td> -->
+                                    <td>
+                                        <p>{{proj.tcomCount}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label class="summaryLabel">Start Date:</label></td>
+                                    <!-- <td><input type="text" class="form-control summaryTextBox"></td> -->
+                                    <td>
+                                        <p>{{proj.sdate}}</p>
+                                    </td>
+                                    <td><label class="summaryLabel">End Date:</label></td>
+                                    <!-- <td><input type="text" class="form-control summaryTextBox"></td> -->
+                                    <td>
+                                        <p>{{proj.edate}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td><label class="summaryLabel">Priotity</label></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p class="prioritybox"> {{proj.priority}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <!-- <td><button type="submit" class="btn defaultButton">Update</button></td> -->
+                                    <td><button (click)="updateProject(proj)" class="btn defaultButton">Update</button></td>
+                                </tr>
+                                <tr>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td><button type="submit" class="btn defaultButton">Suspend</button></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- </form> -->
+</div>
